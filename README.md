@@ -3,6 +3,50 @@ Built a transformer language model from scratch trained on *The Great Gatsby* by
 
 ## How to Run
 
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/abigail-c-douglas/Transformer-from-Scratch.git
+cd Transformer-from-Scratch
+```
+### 2. If uv not installed on computer, install uv
+
+```bash
+pip install uv
+```
+
+### 3. Set up a Python virtual environment. All dependencies are in the pyproject.toml file.
+
+```bash
+uv sync
+```
+
+### 4. Register the virtual environment as a Jupyter kernel
+
+```bash
+source .venv/bin/activate        # Mac/Linux
+.venv\Scripts\activate           # Windows
+python -m ipykernel install --user --name=transformer-llm
+```
+
+### 5. Launch Jupyter and run the notebook
+
+```bash
+jupyter notebook
+```
+
+Open `transformer_from_scratch.ipynb` and select the `transformer-llm` kernel from the top right. Then run all cells top to bottom (`Run → Run All Cells`).
+
+### 6. (Optional) Run tests
+```bash
+pytest tests.py -v
+```
+
+The notebook automatically downloads *The Great Gatsby* automatically from the Project Gutenberg website. It trains the model and prints the 
+loss per epoch. It will display a loss curve and print example generations from both untrained and trained models.
+
+---
+
 ## File Structure
 
 ## Results
