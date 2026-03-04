@@ -79,7 +79,7 @@ the green light → [.vyektgvb!dsqabkquichhakzôxq?uhôeujsdasdj!rwqp!duhodêcmv
 the green light → [ly and the a the dainstak and a ford the in to so and the be she saiders she the dring and the the gatsby on the adest a inged and ind s t thend she sthe he he y te wand are ing thin the he herer ange and the the ous an sn there hero tithinge bl a cand thasust a y d t t t sthind s ar a thot a ougend]
 ```
 
-The trained model produces English words and patterns that can be recognized, which is a substantial improvement over the untrained model.
+The trained model produces English words and patterns that can be recognized, which is a substantial improvement over the untrained model. It was able to pick up on common words like "the", "and", "there", and "she". On some iterations, it was able to form the word "gatsby", which indicates it can retain a small amount of the book's content. However, the model was not able to pick up on more complicated words or generate meaningful sentences due to the limitations of a character-level model. 
 
 ---
 
