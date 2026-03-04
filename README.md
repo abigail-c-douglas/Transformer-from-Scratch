@@ -49,11 +49,23 @@ loss per epoch. It will display a loss curve and print example generations from 
 
 ## File Structure
 
+| File | Description |
+|---|---|
+| `transformer_from_scratch.ipynb` | All code: tokenizer, model, training loop, loss curves, and text generation |
+| `pyproject.toml` | Project dependencies |
+| `README.md` | This file |
+| `model.py` | All model classes: `Config`, `Tokenizer`, `MLP`, `AttentionHead`, `TransformerBlock`, `Transformer` |
+| `tests.py` | Automated tests for the model components | 
+
+---
+
 ## Results
 
 ### Loss Curves
 
 Both the training and validation loss decrease across the 10 epochs without significant overfitting.
+
+![Loss Curves](loss_curves.png)
 
 ### Example Generations
 
@@ -72,3 +84,6 @@ The trained model produces English words and patterns that can be recognized, wh
 ---
 
 ## Writeup
+
+### Design Choices
+The model was trained on *The Great Gatsby* by F. Scott Fizgerald, which was retrieved from Project Gutenberg. The raw text was 270,276 characters, which reduced to 254,275 tokens. The size of the vocabulary was 34 characters. The model had 1,607,459 parameters (~1.6 M), when d_model=128, d_hidden=512, num_blocks=4,and max_seq_length=128. It took approximately 3-5 minutes to train on CPU for 10 epochs. It was trained with the Adam optimizer and a learning rate of 1e-4, which offered stable loss reduction across all epochs.
