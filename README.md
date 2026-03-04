@@ -97,8 +97,8 @@ Since the model was trained on CPU, it took a substantial amount of time, so the
 ### Challenges
 The biggest challenge was balancing model size against training time on the CPU. Larger models made the output of the model more fluent but took far too much time to run, so the hyperparameters of the model had to be tuned carefully to attain good results in a reasonable amount of time. Another challenge was a bug occurred where training loss was recorded only from the last batch in every epoch caused a loss curve that looked unstable. The bug was fixed by averaging the loss across every batch in each epoch.
 
-### What I'd do differently with more time
-If I had more time in the future, I would train on a GPU so that a larger model could be created. This way, the model would produce more accurate results and more fluent sentences. I would also add a multi-head attention mechanism so that the model could focus on different parts of the input sequence at the same time. Additionally, Byte Pair Encoding could be implemented to provide a more detailed vocabulary that would make the output of the trained model more coherent.
+### What would be done different
+In the future, if there was more time, the model would be trained on a GPU so that a larger model could be created. This way, the model would produce more accurate results and more fluent sentences. A multi-head attention mechanism would also be included so that the model could focus on different parts of the input sequence at the same time. Additionally, Byte Pair Encoding could be implemented to provide a more detailed vocabulary that would make the output of the trained model more coherent.
 
 ### Remaining questions
 Would placing LayerNorm inside every transformer block before the attention and MLP layers, rather than once at the end, produce significantly better results with the chosen hyperparameters?
