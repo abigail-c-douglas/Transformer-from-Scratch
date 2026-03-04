@@ -63,7 +63,7 @@ loss per epoch. It will display a loss curve and print example generations from 
 
 ### Loss Curves
 
-Both the training and validation loss decrease across the 10 epochs without significant overfitting.
+Both the training and validation loss decrease across the 10 epochs without significant overfitting. Below is an example loss curve from a training run:
 
 ![Loss Curves](loss_curves.png)
 
@@ -86,4 +86,34 @@ The trained model produces English words and patterns that can be recognized, wh
 ## Writeup
 
 ### Design Choices
-The model was trained on *The Great Gatsby* by F. Scott Fizgerald, which was retrieved from Project Gutenberg. The raw text was 270,276 characters, which reduced to 254,275 tokens. The size of the vocabulary was 34 characters. The model had 1,607,459 parameters (~1.6 M), when d_model=128, d_hidden=512, num_blocks=4,and max_seq_length=128. It took approximately 3-5 minutes to train on CPU for 10 epochs. It was trained with the Adam optimizer and a learning rate of 1e-4, which offered stable loss reduction across all epochs.
+The model was trained on *The Great Gatsby* by F. Scott Fizgerald, which was retrieved from Project Gutenberg. The raw text was 270,276 characters, which reduced to 254,275 tokens. The size of the vocabulary was 34 characters. The model had 1,607,459 parameters (~1.6 M), when d_model=128, d_hidden=512, num_blocks=4,and max_seq_length=128. It took approximately 3-5 minutes to train on CPU for 10 epochs. It was trained with the Adam optimizer and a learning rate of 1e-4, which offered stable loss reduction across all epochs. 
+
+### What went well
+Layer normalization was implemented before the unembedding layer to stabilize the model's training and to increase performance. Both token and positional embedding were included for the model to learn the identity and position of each character in the sequence. A temperature parameter was included in the `generate()` method to control the randomness of the model's output. Residual connections, where the input is added back to the output of each attention and MLP block, allowed the gradients to flow more easily during backpropogation, which stabilized the training. Since the training loss was averaged over all batches per epoch, the loss curvees were stable and consistent.
+
+### What didn't go well
+Since the model was trained on CPU, it took a substantial amount of time, so the model was kept small. This meant that the model could not train for the ideal number of epochs, so the output from the trained model was not yet fully coherent English sentences. 
+
+### Challenges
+The biggest challenge was balancing model size against training time on the CPU. Larger models made the output of the model more fluent but took far too much time to run, so the hyperparameters of the model had to be tuned carefully to attain good results in a reasonable amount of time. Another challenge was a bug occurred where training loss was recorded only from the last batch in every epoch caused a loss curve that looked unstable. The bug was fixed by averaging the loss across every batch in each epoch.
+
+### What I'd do differently with more time
+If I had more time in the future, I would train on a GPU so that a larger model could be created. This way, the model would produce more accurate results and more fluent sentences. I would also add a multi-head attention mechanism so that the model could focus on different parts of the input sequence at the same time. Additionally, Byte Pair Encoding could be implemented to provide a more detailed vocabulary that would make the output of the trained model more coherent.
+
+### Remaining questions
+Would placing LayerNorm inside every transformer block before the attention and MLP layers, rather than once at the end, produce significantly better results with the chosen hyperparameters?
+How much would implementing Byte Pair Encoding improve the coherence of the text the trained model generates compared to the character-level tokenization?
+
+---
+
+## Contributions
+
+The data loading code is adapted from the [math598-llm-project](https://github.com/melody-gold/math598-llm-project) repository, authored by Talia Kumar, Jordyn Graham, Dishita Sharma, and Melody Goldanloo. Used with permission.
+
+Abigail Douglas wrote the `Tokenizer`, `Transformer`, and training loop. 
+
+Abigail Douglas co-authored the `MLP`, `AttentionHead`, and `TransformerBlock` with Elsa Schutfort.
+
+---
+
+
